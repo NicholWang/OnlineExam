@@ -1,15 +1,21 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 import "./common.scss";
 
-import "./components/DisplayIndex";
-import DisplayIndex from "./components/DisplayIndex";
+import HomePage from "./view/HomePage";
+import Login from "./components/Login/Login";
 
 function App() {
   return (
-    <div className="App">
-      <div className="wrapper">
-        <DisplayIndex />
-      </div>
+    <div className="main">
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+      </Switch>
     </div>
   );
 }

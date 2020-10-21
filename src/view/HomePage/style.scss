@@ -1,0 +1,11 @@
+.App {
+  height: 100%;
+}
+.App {
+  background: url(../../img/index.jpg) center/cover no-repeat;
+  .wrapper {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+  }
+}

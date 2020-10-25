@@ -1,0 +1,26 @@
+.nav-bar {
+  width: 255px;
+  height: 100vh;
+  background-attachment: fixed;
+  background-color: rgb(5, 30, 52);
+  background-image: url("../../img/bgc.png");
+  background-position: left 0 bottom 0;
+  background-repeat: no-repeat;
+  background-size: 256px 556px;
+  color: #fff;
+  .nav-title {
+    margin-left: 1rem;
+    img {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .horizon {
+    background-color: rgba(255, 255, 255, 0.1);
+    margin-top: 0.4rem;
+  }
+  .hide {
+    width: 100%;
+    text-align: right;
+  }
+}

@@ -9,15 +9,18 @@
     z-index: 2;
   }
   .check {
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 50%;
     width: 200px;
     height: 80px;
     z-index: 5;
-    visibility: hidden;
-    &:checked + .form-wrapper {
+    opacity: 0;
+    &:checked ~ .form-wrapper {
       transform: scale(1);
+    }
+    &:checked ~ .login_btn {
+      animation: fadeout 1s forwards 0.5s;
     }
   }
 
@@ -31,6 +34,7 @@
     text-align: center;
     font-size: 2rem;
     z-index: 4;
+    transition: all 0.5s 0.5s;
     .login {
       width: 100%;
       height: 90%;
@@ -41,9 +45,6 @@
     &:hover {
       animation-play-state: paused;
     }
-  }
-  .login:active ~ .form-wrapper {
-    transform: scale(1);
   }
   @keyframes skipping {
     0% {
@@ -56,20 +57,25 @@
       transform: rotateX(0deg);
     }
   }
+  @keyframes fadeout {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
   .form-wrapper {
     width: 500px;
     height: 400px;
     background-color: rgba(221, 218, 218, 0.7);
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0);
+    position: fixed;
+    left: 30%;
+    top: 20%;
+    border-radius: 4%;
+    transform: scale(0);
     text-align: center;
     z-index: 999;
-    // display: flex;
-    // flex-direction: column;
-    // justify-items: center;
-    // align-items: center;
     h2 {
       font-weight: 300;
       font-size: 2rem;
@@ -86,6 +92,27 @@
     .form-text:last-child {
       text-align: left;
     }
-    transition: all 1s 0.5s;
+    transition: all 1.5s 0.5s;
+    .btn-account {
+      width: 80%;
+      text-align: center;
+      margin-left: 3rem;
+      margin-top: 1rem;
+      .btn {
+        width: 100%;
+      }
+    }
+    .sign-link {
+      a {
+        text-decoration: none;
+      }
+      margin-top: 0.8rem;
+      text-align: right;
+      font-weight: 100;
+      cursor: pointer;
+      h4 {
+        color: rgba(63, 81, 181, 0.8);
+      }
+    }
   }
 }

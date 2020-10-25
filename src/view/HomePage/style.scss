@@ -7,5 +7,25 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
+    .nav {
+      position: absolute;
+      top: 0.8rem;
+      right: 1rem;
+      a {
+        color: rgb(215, 246, 255);
+        text-decoration: none;
+        font-size: 1.2rem;
+      }
+      a:first-child {
+        padding-right: 0.6rem;
+      }
+      a:last-child {
+        padding-left: 0.6rem;
+      }
+      span {
+        font-size: 1.2rem;
+        color: #fff;
+      }
+    }
   }
 }

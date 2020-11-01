@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
 import Button from "@material-ui/core/Button";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 function DisplayIndex() {
-  const [words, setWords] = useState(["Online", "Exam", "System"]);
+  const [words] = useState(["Online", "Exam", "System"]);
   const [wordsIndex, setWordsIndex] = useState(0);
   const [text, setText] = useState("");
   const [isdel, setIsDel] = useState(false);
-  const [typeSpeed, setTypeSpeed] = useState(300);
-  let timer = null;
+  const [typeSpeed, setTypeSpeed] = useState(400);
+  const ref = useRef()
 
   function typing() {
     const current = wordsIndex % words.length;
@@ -18,26 +18,26 @@ function DisplayIndex() {
       setText(fullTxt.substring(0, text.length - 1));
     } else {
       setText(fullTxt.substring(0, text.length + 1));
-      // console.log(text);
     }
     if (!isdel) {
       setTypeSpeed(typeSpeed / 2);
     }
 
     if (!isdel && text === fullTxt) {
-      setTypeSpeed(300);
+      setTypeSpeed(400);
       setIsDel(true);
     } else if (isdel && text === "") {
       setWordsIndex(wordsIndex + 1);
       setIsDel(false);
-      setTypeSpeed(500);
+      setTypeSpeed(600);
     }
   }
 
   useEffect(() => {
-    timer = setInterval(() => typing(), typeSpeed);
+    const timer = setInterval(() => typing(), typeSpeed);
+    ref.current = timer;
     return () => {
-      clearInterval(timer);
+      clearInterval(ref.current);
     };
   });
   return (

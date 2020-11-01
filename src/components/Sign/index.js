@@ -1,28 +1,58 @@
-import React ,{useState}from 'react'
+import React ,{useState, useEffect, useRef}from 'react'
+import {useDispatch} from "react-redux"
 import './style.scss'
 import logo from '../../img/logo_transparent.png'
 import {Link, withRouter} from "react-router-dom"
 import Axios from "axios";
+import {setCurrentUser} from "../../Redux/User/user.action"
+
 
 function Sign(props) {
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
-  const handleClick = (e) => {
+  const dispatch = useDispatch();
+  const isMounted = useRef(true)
+
+  const handleClick = async (e) => {
     e.preventDefault();
     const data = {
       email,
       password
     }
-    Axios.post("http://127.0.0.1:8000/sign/",data)
-      .then(res => {
-        const location = {
-          pathname: "/teachercenter",
-          state: {user: res.data.user}
+    setEmail("")
+    setPassword("")
+    const res = await Axios.post("http://127.0.0.1:8000/sign",data)
+    if(!res.data.user){
+          alert("用户名或密码错误,请重新登录!")
+        }else{
+          let location = {}
+          const {user, type} = res.data;
+          if(type === '管理'){
+            location = {
+              pathname: "/rootcenter",
+              state: {user: user}
+            }
+          }else{
+            location = {
+              pathname: "/teachercenter",
+              state: {user: user}
+            }
+          }
+          dispatch(setCurrentUser({
+            user: user
+          }))
+          props.history.push(location)
         }
-        props.history.push(location)
-      })
-      .catch(err => console.log(err))
-  }
+      }
+
+
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
+
   return (
     <div className="sign_wrapper">
       <div className="img"><img src={logo} alt=""/></div>
@@ -56,5 +86,10 @@ function Sign(props) {
     </div>
   )
 }
+
+
+
+
+
 
 export default withRouter(Sign)

@@ -1,0 +1,40 @@
+.class_modal {
+  width: 200px;
+  height: 200px;
+}
+
+.form-item {
+  width: 100%;
+  margin-top: 20px;
+  .label {
+    display: block;
+    color: #2a3039;
+    height: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .form-input {
+    display: block;
+    background-color: #f7f9fa;
+    color: #536171;
+    border: 1px solid #dbe3e7;
+    font-size: 14px;
+    border-radius: 3px;
+    outline: none;
+    width: 100%;
+    height: 38px;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+}
+.add_in {
+  display: block;
+  width: 100%;
+  height: 38px;
+  background-color: rgb(83, 151, 231);
+  color: #fff;
+  border: none;
+  outline: none;
+  margin-top: 20px;
+  cursor: pointer;
+}

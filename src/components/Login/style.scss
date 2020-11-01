@@ -7,6 +7,57 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
+    #stu {
+      visibility: hidden;
+      &:checked ~ .login_btn {
+        animation: fadeout 1s forwards 0.5s;
+      }
+      &:checked ~ .student-wrapper {
+        animation: fadeout 1s forwards 0.5s;
+      }
+      &:checked ~ .teacher-wrapper {
+        animation: fadeout 1s forwards 0.5s;
+      }
+      &:checked ~ .form-wrapper {
+        transform: scale(1);
+      }
+    }
+    #tech {
+      visibility: hidden;
+      &:checked ~ .login_btn {
+        animation: fadeout 1s forwards 0.5s;
+      }
+      &:checked ~ .teacher-wrapper {
+        animation: fadeout 1s forwards 1.5s;
+      }
+      &:checked ~ .form-wrapper-1 {
+        transform: scale(1);
+      }
+    }
+    .student-wrapper,
+    .teacher-wrapper {
+      display: block;
+      width: 120px;
+      height: 120px;
+      position: absolute;
+      top: 40%;
+      left: 38%;
+      background-color: #fff;
+      text-align: center;
+      padding: 3rem 0;
+      box-sizing: border-box;
+      border-radius: 50%;
+      transform: scale(0);
+      font-size: 1.2rem;
+      color: rgb(144, 164, 174);
+    }
+    .teacher-wrapper {
+      top: 28%;
+      left: 47%;
+      &:hover {
+        animation-play-state: paused;
+      }
+    }
   }
   .check {
     position: absolute;
@@ -16,11 +67,14 @@
     height: 80px;
     z-index: 5;
     opacity: 0;
-    &:checked ~ .form-wrapper {
-      transform: scale(1);
+    &:checked ~ .student-wrapper {
+      animation: pop 2s ease-in forwards 1.5s infinite;
+    }
+    &:checked ~ .teacher-wrapper {
+      animation: pop 2s ease-in forwards 1.5s infinite;
     }
     &:checked ~ .login_btn {
-      animation: fadeout 1s forwards 0.5s;
+      animation: none;
     }
   }
 
@@ -65,7 +119,19 @@
       opacity: 0;
     }
   }
-  .form-wrapper {
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .form-wrapper,
+  .form-wrapper-1 {
     width: 500px;
     height: 400px;
     background-color: rgba(221, 218, 218, 0.7);
@@ -74,6 +140,7 @@
     top: 20%;
     border-radius: 4%;
     transform: scale(0);
+    transition: all 1.5s ease;
     text-align: center;
     z-index: 999;
     h2 {

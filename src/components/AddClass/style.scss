@@ -1,0 +1,23 @@
+.class-wrapper {
+  float: left;
+  position: relative;
+  width: 1105px;
+  height: 100vh;
+  background-color: rgba(255, 248, 249, 0.8);
+  // background-color: rgba(0, 0, 0, 0.6);
+}
+.class-inner {
+  position: absolute;
+  width: 90%;
+  height: 80%;
+  margin-top: 3rem;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -30%);
+}
+.add-class {
+  margin-bottom: 1rem;
+}
+.page {
+  margin-top: 2rem;
+}

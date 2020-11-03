@@ -10,9 +10,7 @@ function DrawerItem(props) {
   const [toggle,setToggle] = useState(false)
   const {title,item} = props;
   const dispatch = useDispatch();
-  // console.log(item.length)
   const handleClick = (title) => {
-    console.log('hhh');
     dispatch(setRootActive(title))
   }
   return (

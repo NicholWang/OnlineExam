@@ -65,6 +65,7 @@ function Sign(props) {
             type="text" 
             id="email" 
             className="form-input"
+            autoComplete="off"
             value={email}
             onChange={(e) => setEmail(e.target.value)}/>
           </div>
@@ -74,6 +75,7 @@ function Sign(props) {
             type="password" 
             id="password"
             className="form-input" 
+            autoComplete="off"
             value={password}
             onChange={(e) => setPassword(e.target.value)}/>
           </div>

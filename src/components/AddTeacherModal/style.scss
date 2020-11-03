@@ -1,0 +1,28 @@
+.add_teacher_form {
+  width: 400px;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.t-form-item {
+  width: 100%;
+  margin-top: 1.2rem;
+  text-align: center;
+}
+.t-form-text {
+  width: 80%;
+}
+.add-teacher {
+  width: 80%;
+  margin-top: 1.2rem;
+  text-align: center;
+  button {
+    display: block;
+    width: 100%;
+  }
+}
+.add-t {
+  margin-bottom: 1.2rem;
+}

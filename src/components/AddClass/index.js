@@ -29,34 +29,50 @@ function AddClass(props) {
   
   useEffect(() => {
     const GetData = async () => {
-      let {data} = await Axios.get('http://127.0.0.1:8000/get_class')
-      data = JSON.parse(data).map(item => {
-        return item.fields
-      })
-      console.log(data);
-      setRows([
-        ...rows,
-        ...data
-      ])
+      let {data} = await Axios.get('http://127.0.0.1:8000/get_class',{params:{
+        page_num: 1
+      }})
+      if(data !== "page dont't exist"){
+        data = JSON.parse(data).map(item => {
+          return item.fields
+        })
+        console.log(data);
+        setRows([
+          ...rows,
+          ...data
+        ])
+      }else{
+        setRows([])
+      }
     }
     GetData()
   },[])
   const handleCallback = (childata) => {
     console.log(childata);
-    setRows([...rows,childata])
+    alert('添加成功')
+    // setRows([...rows,childata])
   }
   const handleUpdate = async (childata) => {
     const {class_name, stu_count} = childata;
     console.log(childata);
-    await setRows(rows.map(row => {
-      if(row.class_name === class_name){
-        console.log('符合');
-        row.class_name = class_name
-        row.stu_count = stu_count
-      }
-      return row
-    }))
-    console.log(rows);
+    const data = {
+      class_name,
+      stu_count
+    }
+    Axios.post('http://127.0.0.1:8000/update_class',data)
+      .then(async res => {
+        if(res.data === 'success'){
+          await setRows(rows.map(row => {
+            if(row.class_name === class_name){
+              console.log('符合');
+              row.class_name = class_name
+              row.stu_count = stu_count
+            }
+            return row
+          }))
+          console.log(rows);
+        }
+      }).catch(err => console.log(err))
   }
   const handleDelete =  (data) => {
       const r = window.confirm('确认删除此班级?')
@@ -64,16 +80,36 @@ function AddClass(props) {
         Axios.get('http://127.0.0.1:8000/del_class',{params:{
           class_name: data
         }}).then(async res => {
-          await setRows(rows.filter(row => row.class_name !== data))
-          console.log(rows);
-          console.log(res.data)
+          if(res.data === 'success'){
+            await setRows(rows.filter(row => row.class_name !== data))
+            console.log(rows);
+            console.log(res.data)
+            alert('删除成功!')
+          }
         })
             .catch(err => console.log(err))
       }
   }
+  const handlePage = async (e) => {
+    e.preventDefault()
+    const page_num = e.target.ariaLabel.split(' ')[3]
+    let {data} = await Axios.get('http://127.0.0.1:8000/get_class',{params:{
+      page_num: page_num
+    }})
+    if(data !== "page dont't exist"){
+    data = JSON.parse(data).map(item => {
+      return item.fields
+    })
+    setRows([
+      ...data
+    ])
+  }else{
+    setRows([])
+  }
+  }
   return (
     <div className="class-wrapper">
-      <Appbar user={props.user}/>
+      <Appbar user={'管理员'}/>
       <div className="class-inner">
      <div className="add-class"> 
      <SimpleModal parentCallback={handleCallback}/>
@@ -109,7 +145,15 @@ function AddClass(props) {
         </TableBody>
       </Table>
     </TableContainer>
-    <Pagination count={6} defaultPage={2} siblingCount={0} boundaryCount={1} className="page"/>
+    <Pagination 
+      count={6} 
+      defaultPage={1} 
+      siblingCount={1}
+       boundaryCount={1} 
+       className="page"
+      //  page={page}
+       onClick={handlePage}/>
+
     </div>
     </div>
   )

@@ -16,7 +16,7 @@ const mapState = ({user}) => ({
 })
 function App() {
   const {userinfo} = useSelector(mapState);
-  console.log(userinfo);
+  // console.log(userinfo);
   return (
     <div className="main">
       <Switch>

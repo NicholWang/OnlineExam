@@ -13,6 +13,7 @@ const mapState = ({user}) => ({
 function RootCenter(props) {
   const {user} = props.location.state;
   const {title} = useSelector(mapState);
+  console.log('object',title);
   // console.log(typeof(title));
   // console.log(title.title)
   const columns = [
@@ -21,13 +22,18 @@ function RootCenter(props) {
     {title: '添加教师',item:[]},
     {title: '添加学生', item:[]}
   ]
-  const conditionalRender = () => {
-    if(title === '添加班级' || title === `欢迎你,${user}`){
-      return <AddClass/>
-    }else if(title === '添加教师'){
-      return <AddTeacher/> 
-    }else if(title === '添加学生'){
-      return <AddStudent/>
+  const conditionalRender = (title) => {
+    switch(title){
+      case '添加班级':
+        return <AddClass/>
+      case `欢迎你,${user}`:
+        return <AddClass/>
+      case '添加教师':
+        return <AddTeacher/> 
+      case '添加学生':
+        return <AddStudent/>
+      default:
+        return <AddClass/>
     }
   }
   return (
@@ -35,7 +41,7 @@ function RootCenter(props) {
       <Navbar columns={columns}/>
       
       {
-        conditionalRender()
+        conditionalRender(title)
       }
     </div>
   )

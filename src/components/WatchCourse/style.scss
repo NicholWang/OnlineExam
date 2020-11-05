@@ -1,0 +1,9 @@
+.stu-course-card {
+  position: absolute;
+  width: 80%;
+  display: grid;
+  margin: 1rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-row-gap: 2rem;
+  grid-column-gap: 2rem;
+}

@@ -32,7 +32,13 @@ function Sign(props) {
               pathname: "/rootcenter",
               state: {user: user}
             }
-          }else{
+          }else if(type === '学生'){
+            location = {
+              pathname: "/studentcenter",
+              state: {user: user}
+            }
+          }
+          else{
             location = {
               pathname: "/teachercenter",
               state: {user: user}

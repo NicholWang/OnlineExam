@@ -8,6 +8,7 @@ import Login from "./components/Login/Login";
 import Sign from "./components/Sign/index";
 import TeacherPage from "./view/TeacherPage"
 import RootPage from "./view/RootPage"
+import StudentPage from "./components/StudentCenter"
 import UploadFile from "./components/UploadFile"
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route exact path="/sign">
           <Sign />
+        </Route>
+        <Route exact path="/studentcenter">
+         {userinfo ? <StudentPage/> : <Redirect to="/sign"/>}
         </Route>
         <Route exact path="/teachercenter">
          {userinfo ? <TeacherPage/> : <Redirect to="/sign"/>}

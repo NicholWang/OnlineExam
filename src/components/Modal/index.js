@@ -56,6 +56,8 @@ export default function SimpleModal(props) {
       .then(res => {
         setOpen(false)
         console.log(res.data);
+        setStuCount("")
+        setClassName("")
         parentCallback(res.data)
       })
       .catch(err => console.log(err))
